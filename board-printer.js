@@ -17,21 +17,24 @@
 */
 export function printBoard(board) {
   let rowString = "";
-  for (const row of board) {
-    for (let i = 0; i < row.length; i++) {
-      if (row[i].toLowerCase() === "_") {
+  for (let row = 0; row < board.length; row++) {
+    for (let column = 0; column < board[row].length; column++) {
+      if (board[row][column].toLowerCase() === "_") {
         rowString += "   ";
-      } else if (row[i].toLowerCase() === "x") {
+      } else if (board[row][column].toLowerCase() === "x") {
         rowString += " X ";
       } else {
         rowString += " O ";
       }
-      if (i < 2) {
+      if (column < 2) {
         rowString += "|";
       }
     }
     console.log(rowString);
     rowString = "";
+    if (row < 2) {
+      console.log("===========");
+    }
   }
 }
 
