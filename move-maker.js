@@ -16,8 +16,28 @@
         ];
 */
 function validateMove(move, board) {
-    // Implement this at the end if you have time, otherwise you can help your teammates!
-    return true;
+  if (typeof move !== "string") {
+    console.log("Try again!");
+    return false;
+  }
+  const pattern = /^[1-3],[1-3]$/;
+  if (!pattern.test(move)) {
+    console.log("Try again !!");
+    return false;
+  }
+  const coordinates = move.split(",");
+  const row = coordinates[0];
+  const column = coordinates[1];
+  const rowNum = Number(row);
+  const columnNum = Number(column);
+  const rowPosition = rowNum - 1;
+  const columnPosition = columnNum - 1;
+
+  if (board[rowPosition][columnPosition] !== "_") {
+    console.log("Try again!, It's occupied!");
+    return false;
+  }
+  return true;
 }
 
 /*
@@ -32,5 +52,15 @@ function validateMove(move, board) {
             - Return true
 */
 export function makeMove(board, move, player) {
+  const isValid = validateMove(move, board);
+  if (!isValid) {
     return false;
+  }
+  const coordinates = move.split(",");
+  const rowPosition = Number(coordinates[0]) - 1;
+  const columnPosition = Number(coordinates[1]) - 1;
+
+  board[rowPosition][columnPosition] = player;
+
+  return true;
 }
